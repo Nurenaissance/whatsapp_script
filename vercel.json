@@ -5,10 +5,5 @@
         "src": "/whatsapp-widget.js",
         "dest": "/api/index.js"
       }
-    ],
-    "functions": {
-      "api/**/*.[jt]s": {
-        "runtime": "@vercel/node@3.0.0"
-      }
-    }
+    ]
   }
