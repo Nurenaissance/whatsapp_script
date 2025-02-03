@@ -1,7 +1,8 @@
 (function() {
     function createWhatsAppWidget() {
-        const phoneNumber = currentScript.getAttribute('phone') || "1234567890";
-        const chatTitle = currentScript.getAttribute('name') || "Chat with us";
+        const phoneNumber = currentScript ? currentScript.getAttribute('phone') : "1234567890";
+        const chatTitle = currentScript ? currentScript.getAttribute('name') : "Chat with us";
+        
       
       const chatIcon = document.createElement("div");
       chatIcon.id = "whatsapp-icon";
