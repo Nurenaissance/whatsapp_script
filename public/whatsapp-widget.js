@@ -1,5 +1,10 @@
 (function() {
     function createWhatsAppWidget() {
+        const currentScript = document.currentScript || 
+        (function() {
+            const scripts = document.getElementsByTagName('script');
+            return scripts[scripts.length - 1];
+        })();
         const phoneNumber = currentScript ? currentScript.getAttribute('phone') : "1234567890";
         const chatTitle = currentScript ? currentScript.getAttribute('name') : "Chat with us";
         
