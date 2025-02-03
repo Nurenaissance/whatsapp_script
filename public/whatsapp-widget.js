@@ -1,20 +1,20 @@
+// Save as whatsapp-widget.js
 (function() {
     function createWhatsAppWidget() {
-        const currentScript = document.currentScript || 
-        (function() {
-            const scripts = document.getElementsByTagName('script');
-            return scripts[scripts.length - 1];
-        })();
-        const phoneNumber = currentScript ? currentScript.getAttribute('phone') : "1234567890";
-        const chatTitle = currentScript ? currentScript.getAttribute('name') : "Chat with us";
-        
+      // Get current script tag
+      const scripts = document.getElementsByTagName('script');
+      const currentScript = scripts[scripts.length - 1];
       
+      // Get attributes with fallbacks
+      const phoneNumber = currentScript.getAttribute('phone') || "1234567890";
+      const chatTitle = currentScript.getAttribute('name') || "Chat with us";
+      
+      // Create widget elements
       const chatIcon = document.createElement("div");
       chatIcon.id = "whatsapp-icon";
       chatIcon.setAttribute('aria-label', 'Open WhatsApp Chat');
       chatIcon.setAttribute('role', 'button');
       chatIcon.innerHTML = "💬";
-      document.body.appendChild(chatIcon);
       
       const chatBox = document.createElement("div");
       chatBox.id = "chat-box";
@@ -27,8 +27,8 @@
           <button id="send-btn" aria-label="Send WhatsApp message">Send</button>
         </div>
       `;
-      document.body.appendChild(chatBox);
       
+      // Add styles
       const styles = document.createElement("style");
       styles.innerHTML = `
         #whatsapp-icon {
@@ -100,36 +100,34 @@
           border-radius: 5px;
         }
       `;
-      document.head.appendChild(styles);
       
-      chatIcon.addEventListener("click", function() {
+      // Append elements to document
+      document.head.appendChild(styles);
+      document.body.appendChild(chatIcon);
+      document.body.appendChild(chatBox);
+      
+      // Add event listeners
+      chatIcon.addEventListener("click", () => {
         chatBox.style.display = chatBox.style.display === "block" ? "none" : "block";
       });
       
       const sendButton = document.getElementById("send-btn");
       const chatInput = document.getElementById("chat-input");
       
-      sendButton.addEventListener("click", function() {
+      sendButton.addEventListener("click", () => {
         const message = chatInput.value.trim();
         if (message) {
-          const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-          window.open(whatsappUrl, "_blank");
+          window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, "_blank");
           chatInput.value = "";
-        } else {
-          chatInput.setAttribute('aria-invalid', 'true');
-          setTimeout(() => chatInput.removeAttribute('aria-invalid'), 2000);
         }
       });
-  
-      // Allow sending message with Enter key
-      chatInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          sendButton.click();
-        }
+      
+      chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendButton.click();
       });
     }
   
-    // Initialize the widget when the DOM is fully loaded
+    // Initialize widget
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', createWhatsAppWidget);
     } else {
