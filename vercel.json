@@ -1,7 +1,14 @@
 {
     "version": 2,
     "routes": [
-      { "src": "/whatsapp-chatbot.js", "dest": "/whatsapp-chatbot.js" }
-    ]
+      { 
+        "src": "/whatsapp-widget.js",
+        "dest": "/api/index.js"
+      }
+    ],
+    "functions": {
+      "api/index.js": {
+        "runtime": "nodejs18.x"
+      }
+    }
   }
-  
