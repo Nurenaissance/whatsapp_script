@@ -1,8 +1,7 @@
 (function() {
     function createWhatsAppWidget() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const phoneNumber = urlParams.get("phone") || "1234567890";
-      const chatTitle = urlParams.get("name") || "Chat with us";
+        const phoneNumber = currentScript.getAttribute('phone') || "1234567890";
+        const chatTitle = currentScript.getAttribute('name') || "Chat with us";
       
       const chatIcon = document.createElement("div");
       chatIcon.id = "whatsapp-icon";
