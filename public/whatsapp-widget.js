@@ -204,6 +204,22 @@
             this.createWidget();
             this.bindEvents();
         }
+        destroy() {
+            // Remove all created elements
+            this.elements.forEach(element => element.remove());
+            
+            // Clean up event listeners
+            this.eventListeners.forEach(({ target, type, listener }) => {
+                target.removeEventListener(type, listener);
+            });
+            
+            // Remove injected styles
+            const styles = document.querySelectorAll('style');
+            styles.forEach(style => {
+                if (style.textContent.includes(STYLES)) style.remove();
+            });
+        }
+    
 
         injectStyles() {
             const styleSheet = document.createElement('style');
