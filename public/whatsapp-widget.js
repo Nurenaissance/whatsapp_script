@@ -21,7 +21,7 @@
             <svg viewBox="0 0 24 24" width="24" height="24">
                 <path fill="#fff" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
             </svg>`,
-        backgroundPattern: `data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTQuNjI3IDQuMzgzYzEuMDYxIDEuMDYxIDEuMDYxIDIuNzgyIDAgMy44NDNMNDcuODQgMTUuMDEzYy0xLjA2MSAxLjA2MS0yLjc4MiAxLjA2MS0zLjg0MyAwbC02Ljc4NC02Ljc4NGMtMS4wNjEtMS4wNjEtMS4wNjEtMi43ODIgMC0zLjg0M2w2Ljc4NC02Ljc4NGMxLjA2MS0xLjA2MSAyLjc4Mi0xLjA2MSAzLjg0MyAwbDYuNzg0IDYuNzg0eiIgZmlsbD0icmdiYSgyMjUsMjI1LDIyNSwwLjMpIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=`
+        backgroundPattern: `data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23128C7E' fill-opacity='0.04' fill-rule='evenodd'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' /%3E%3C/g%3E%3C/svg%3E`
     };
 
     const STYLES = `
@@ -82,16 +82,15 @@
         cursor: pointer;
         padding: 0;
     }
-
-    #whatsapp-widget-body {
+ #whatsapp-widget-body {
         padding: 20px;
         max-height: 400px;
         overflow-y: auto;
-        background-color: #E5DDD5;
-        background-image: url("${TEMPLATES.backgroundPattern}"), 
-                        linear-gradient(rgba(229,221,213,0.92), rgba(229,221,213,0.92));
+        background-color: #e5ddd5;
+        background-image: url("${TEMPLATES.backgroundPattern}");
         background-repeat: repeat;
-        background-size: 60px, auto;
+        background-size: 80px;
+        position: relative;
     }
 
     .whatsapp-widget-welcome {
