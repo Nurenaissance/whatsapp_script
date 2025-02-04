@@ -20,137 +20,179 @@
         sendIcon: `
             <svg viewBox="0 0 24 24" width="24" height="24">
                 <path fill="#fff" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-            </svg>`
+            </svg>`,
+        backgroundPattern: `data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTQuNjI3IDQuMzgzYzEuMDYxIDEuMDYxIDEuMDYxIDIuNzgyIDAgMy44NDNMNDcuODQgMTUuMDEzYy0xLjA2MSAxLjA2MS0yLjc4MiAxLjA2MS0zLjg0MyAwbC02Ljc4NC02Ljc4NGMtMS4wNjEtMS4wNjEtMS4wNjEtMi43ODIgMC0zLjg0M2w2Ljc4NC02Ljc4NGMxLjA2MS0xLjA2MSAyLjc4Mi0xLjA2MSAzLjg0MyAwbDYuNzg0IDYuNzg0eiIgZmlsbD0icmdiYSgyMjUsMjI1LDIyNSwwLjMpIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4=`
     };
 
     const STYLES = `
-        #whatsapp-widget-icon {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25D366;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            z-index: 999999;
-            transition: transform 0.3s ease;
-        }
+    #whatsapp-widget-icon {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25D366;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        z-index: 999999;
+        transition: transform 0.3s ease;
+    }
 
-        #whatsapp-widget-icon:hover {
-            transform: scale(1.1);
-        }
+    #whatsapp-widget-icon:hover {
+        transform: scale(1.1);
+    }
 
+    #whatsapp-widget-chat {
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        width: 350px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+        z-index: 999998;
+        display: none;
+        overflow: hidden;
+    }
+
+    #whatsapp-widget-header {
+        background: #075E54;
+        color: white;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .whatsapp-widget-header-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #whatsapp-widget-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    #whatsapp-widget-body {
+        padding: 20px;
+        max-height: 400px;
+        overflow-y: auto;
+        background-color: #E5DDD5;
+        background-image: url("${TEMPLATES.backgroundPattern}"), 
+                        linear-gradient(rgba(229,221,213,0.92), rgba(229,221,213,0.92));
+        background-repeat: repeat;
+        background-size: 60px, auto;
+    }
+
+    .whatsapp-widget-welcome {
+        background: #DCF8C6;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        position: relative;
+    }
+
+    .whatsapp-widget-welcome::after {
+        content: '';
+        position: absolute;
+        top: 15px;
+        right: -8px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 0 8px 8px;
+        border-color: transparent transparent transparent #DCF8C6;
+    }
+
+    .whatsapp-widget-quick-replies {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .whatsapp-widget-quick-reply {
+        background: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.2s;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        position: relative;
+    }
+
+    .whatsapp-widget-quick-reply:hover {
+        background: #F5F5F5;
+    }
+
+    #whatsapp-widget-footer {
+        padding: 15px;
+        background: #F0F2F5;
+        display: flex;
+        gap: 10px;
+        border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    #whatsapp-widget-input {
+        flex: 1;
+        padding: 10px 15px;
+        border: 1px solid #DDD;
+        border-radius: 20px;
+        outline: none;
+        font-family: inherit;
+    }
+
+    #whatsapp-widget-input:focus {
+        border-color: #25D366;
+    }
+
+    #whatsapp-widget-send {
+        background: #25D366;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    #whatsapp-widget-send:hover {
+        background: #1EA952;
+    }
+
+    .whatsapp-widget-powered {
+        text-align: center;
+        padding: 5px;
+        font-size: 12px;
+        color: #666;
+        background: #F0F2F5;
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    @media (max-width: 480px) {
         #whatsapp-widget-chat {
-            position: fixed;
-            bottom: 100px;
+            width: calc(100% - 40px);
             right: 20px;
-            width: 350px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-            z-index: 999998;
-            display: none;
-            overflow: hidden;
+            bottom: 90px;
         }
-
-        #whatsapp-widget-header {
-            background: #075E54;
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .whatsapp-widget-header-content {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        #whatsapp-widget-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            padding: 0;
-        }
-
-        #whatsapp-widget-body {
-            padding: 20px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .whatsapp-widget-welcome {
-            background: #DCF8C6;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        .whatsapp-widget-quick-replies {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .whatsapp-widget-quick-reply {
-            background: #F0F0F0;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            text-align: left;
-            transition: background 0.2s;
-        }
-
-        .whatsapp-widget-quick-reply:hover {
-            background: #E0E0E0;
-        }
-
-        #whatsapp-widget-footer {
-            padding: 15px;
-            background: #F0F2F5;
-            display: flex;
-            gap: 10px;
-        }
-
-        #whatsapp-widget-input {
-            flex: 1;
-            padding: 10px 15px;
-            border: 1px solid #DDD;
-            border-radius: 20px;
-            outline: none;
-        }
-
-        #whatsapp-widget-send {
-            background: #25D366;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .whatsapp-widget-powered {
-            text-align: center;
-            padding: 5px;
-            font-size: 12px;
-            color: #666;
-            background: #F0F2F5;
-        }
-    `;
+    }
+`;
 
     class WhatsAppWidget {
         constructor(options) {
