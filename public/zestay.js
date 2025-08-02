@@ -3,12 +3,12 @@
 
     const DEFAULT_OPTIONS = {
         phone: '1234567890',
-        name: 'Zestay Concierge',
+        name: 'Zestay',
         quickReplies: [
-            "I need help with check-in 🏨",
-            "Upload my documents 📄", 
-            "Ask about my reservation 🗓️",
-            "Speak to concierge 💬"
+            "Help with check-in",
+            "Upload documents", 
+            "My reservation",
+            "Speak to someone"
         ]
     };
 
@@ -19,182 +19,128 @@
 </svg>
 `,
         sendIcon: `
-            <svg viewBox="0 0 24 24" width="20" height="20">
-                <path fill="url(#gradient)" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                <defs>
-                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style="stop-color:#9333ea;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
+            <svg viewBox="0 0 24 24" width="18" height="18">
+                <path fill="white" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
             </svg>`,
-        zestayLogo: `
-            <svg viewBox="0 0 24 24" width="24" height="24">
-                <circle cx="12" cy="12" r="10" fill="url(#logoGradient)"/>
-                <text x="12" y="16" text-anchor="middle" fill="white" font-family="system-ui" font-size="12" font-weight="600">Z</text>
-                <defs>
-                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#9333ea;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
+        closeIcon: `
+            <svg viewBox="0 0 24 24" width="14" height="14">
+                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
             </svg>`
     };
 
     const STYLES = `
         #whatsapp-widget-icon {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 24px;
+            right: 24px;
             background-color: #25D366;
-            width: 60px;
-            height: 60px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
             z-index: 999999;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: breathe 3s ease-in-out infinite;
-        }
-        
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         
         #whatsapp-widget-icon:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 40px rgba(37, 211, 102, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
         
         #whatsapp-widget-chat {
             position: fixed;
-            bottom: 100px;
-            right: 20px;
-            width: 380px;
+            bottom: 88px;
+            right: 24px;
+            width: 320px;
             background: white;
-            border-radius: 24px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
             z-index: 999998;
             display: none;
             overflow: hidden;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transform: translateY(20px) scale(0.95);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            transform: translateY(8px);
             opacity: 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.25s ease;
         }
         
         #whatsapp-widget-chat.show {
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
             opacity: 1;
         }
         
         #whatsapp-widget-header {
-            background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
-            color: white;
-            padding: 24px;
+            background: white;
+            color: #1d1d1f;
+            padding: 20px 20px 16px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        #whatsapp-widget-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: shimmer 4s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(0deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(360deg); }
+            align-items: flex-start;
+            border-bottom: 1px solid #f2f2f7;
         }
         
         .whatsapp-widget-header-content {
             display: flex;
             align-items: center;
-            gap: 12px;
-            z-index: 1;
+            gap: 0;
         }
         
         .whatsapp-widget-title {
             font-weight: 600;
-            font-size: 18px;
-            letter-spacing: -0.025em;
+            font-size: 17px;
+            color: #1d1d1f;
+            letter-spacing: -0.022em;
+            line-height: 1.2;
         }
         
         .whatsapp-widget-subtitle {
-            font-size: 14px;
-            opacity: 0.9;
+            font-size: 13px;
+            color: #86868b;
             font-weight: 400;
-            margin-top: 2px;
+            margin-top: 1px;
+            letter-spacing: -0.008em;
         }
         
         #whatsapp-widget-close {
-            background: rgba(255, 255, 255, 0.2);
+            background: #f2f2f7;
             border: none;
-            color: white;
-            width: 32px;
-            height: 32px;
+            color: #86868b;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            transition: all 0.2s ease;
-            z-index: 1;
+            transition: all 0.15s ease;
+            margin-top: -2px;
         }
         
         #whatsapp-widget-close:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
+            background: #e5e5ea;
+            color: #1d1d1f;
         }
         
         #whatsapp-widget-body {
-            padding: 24px;
-            background: linear-gradient(145deg, #fafafa 0%, #f5f5f5 100%);
-            position: relative;
+            padding: 20px;
+            background: white;
         }
         
         .whatsapp-widget-welcome {
-            background: white;
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            position: relative;
-        }
-        
-        .whatsapp-widget-welcome::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 24px;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 8px 8px 0 8px;
-            border-color: white transparent transparent transparent;
+            margin-bottom: 16px;
         }
         
         .whatsapp-widget-welcome-text {
-            font-size: 16px;
-            color: #1f2937;
-            line-height: 1.5;
+            font-size: 15px;
+            color: #1d1d1f;
+            line-height: 1.4;
             margin: 0 0 16px 0;
-            font-weight: 500;
+            font-weight: 400;
+            letter-spacing: -0.016em;
         }
         
         .whatsapp-widget-quick-replies {
@@ -204,129 +150,111 @@
         }
         
         .whatsapp-widget-quick-reply {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            background: #f2f2f7;
+            border: none;
             padding: 12px 16px;
-            border-radius: 12px;
+            border-radius: 8px;
             cursor: pointer;
             text-align: left;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 14px;
-            color: #374151;
-            font-weight: 500;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .whatsapp-widget-quick-reply::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
-            opacity: 0;
-            transition: opacity 0.2s ease;
+            transition: all 0.15s ease;
+            font-size: 15px;
+            color: #1d1d1f;
+            font-weight: 400;
+            letter-spacing: -0.016em;
+            line-height: 1.3;
         }
         
         .whatsapp-widget-quick-reply:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(147, 51, 234, 0.15);
-            border-color: rgba(147, 51, 234, 0.3);
-            color: white;
+            background: #e5e5ea;
+            transform: none;
         }
         
-        .whatsapp-widget-quick-reply:hover::before {
-            opacity: 1;
-        }
-        
-        .whatsapp-widget-quick-reply span {
-            position: relative;
-            z-index: 1;
+        .whatsapp-widget-quick-reply:active {
+            background: #d1d1d6;
+            transform: scale(0.98);
         }
         
         #whatsapp-widget-footer {
-            padding: 20px 24px 24px;
+            padding: 16px 20px 20px;
             background: white;
             display: flex;
-            gap: 12px;
+            gap: 8px;
             align-items: flex-end;
+            border-top: 1px solid #f2f2f7;
         }
         
         #whatsapp-widget-input {
             flex: 1;
-            padding: 12px 16px;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
+            padding: 10px 12px;
+            border: 1px solid #d1d1d6;
+            border-radius: 8px;
             outline: none;
-            font-family: inherit;
-            font-size: 14px;
-            transition: all 0.2s ease;
-            background: #fafafa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            font-size: 15px;
+            background: white;
+            color: #1d1d1f;
+            letter-spacing: -0.016em;
+            transition: border-color 0.15s ease;
         }
         
         #whatsapp-widget-input:focus {
-            border-color: #9333ea;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+            border-color: #1d1d1f;
+        }
+        
+        #whatsapp-widget-input::placeholder {
+            color: #86868b;
         }
         
         #whatsapp-widget-send {
-            background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+            background: #1d1d1f;
             border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+            transition: all 0.15s ease;
+            opacity: 0.3;
+            pointer-events: none;
         }
         
-        #whatsapp-widget-send:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(147, 51, 234, 0.4);
+        #whatsapp-widget-send.active {
+            opacity: 1;
+            pointer-events: all;
         }
         
-        #whatsapp-widget-send:active {
-            transform: translateY(0);
+        #whatsapp-widget-send.active:hover {
+            background: #000;
+        }
+        
+        #whatsapp-widget-send.active:active {
+            transform: scale(0.95);
         }
         
         .whatsapp-widget-powered {
             text-align: center;
             padding: 12px;
-            font-size: 12px;
-            color: #9ca3af;
-            background: #fafafa;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            font-weight: 500;
-            letter-spacing: 0.025em;
+            font-size: 11px;
+            color: #86868b;
+            background: #fbfbfd;
+            border-top: 1px solid #f2f2f7;
+            font-weight: 400;
+            letter-spacing: 0.006em;
         }
         
         @media (max-width: 480px) {
             #whatsapp-widget-chat {
-                width: calc(100% - 40px);
-                right: 20px;
-                bottom: 90px;
+                width: calc(100% - 48px);
+                right: 24px;
             }
         }
         
-        .fade-in {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        * {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
     `;
 
@@ -354,39 +282,40 @@
         createWidget() {
             const widget = document.createElement('div');
             widget.innerHTML = `
-                <div id="whatsapp-widget-icon" role="button" aria-label="Open WhatsApp Chat">
+                <div id="whatsapp-widget-icon" role="button" aria-label="Open chat">
                     ${TEMPLATES.whatsappIcon}
                 </div>
-                <div id="whatsapp-widget-chat" role="dialog" aria-label="WhatsApp Chat">
+                <div id="whatsapp-widget-chat" role="dialog" aria-label="Chat">
                     <div id="whatsapp-widget-header">
                         <div class="whatsapp-widget-header-content">
-                            ${TEMPLATES.zestayLogo}
                             <div>
                                 <div class="whatsapp-widget-title">${this.options.name}</div>
                                 <div class="whatsapp-widget-subtitle">Always here to help</div>
                             </div>
                         </div>
-                        <button id="whatsapp-widget-close" aria-label="Close chat">✕</button>
+                        <button id="whatsapp-widget-close" aria-label="Close">
+                            ${TEMPLATES.closeIcon}
+                        </button>
                     </div>
                     <div id="whatsapp-widget-body">
                         <div class="whatsapp-widget-welcome">
-                            <p class="whatsapp-widget-welcome-text">👋 Welcome! How can we make your stay perfect?</p>
+                            <p class="whatsapp-widget-welcome-text">How can we help you today?</p>
                             <div class="whatsapp-widget-quick-replies">
                                 ${this.options.quickReplies.map(msg => `
                                     <button class="whatsapp-widget-quick-reply" data-message="${msg}">
-                                        <span>${msg}</span>
+                                        ${msg}
                                     </button>
                                 `).join('')}
                             </div>
                         </div>
                     </div>
                     <div id="whatsapp-widget-footer">
-                        <input type="text" id="whatsapp-widget-input" placeholder="Type your message..." aria-label="Message input">
-                        <button id="whatsapp-widget-send" aria-label="Send message">
+                        <input type="text" id="whatsapp-widget-input" placeholder="Message" aria-label="Type a message">
+                        <button id="whatsapp-widget-send" aria-label="Send">
                             ${TEMPLATES.sendIcon}
                         </button>
                     </div>
-                    <div class="whatsapp-widget-powered">Powered by Zestay ✨</div>
+                    <div class="whatsapp-widget-powered">Powered by Zestay</div>
                 </div>
             `;
             document.body.appendChild(widget);
@@ -401,19 +330,27 @@
             const sendBtn = document.getElementById('whatsapp-widget-send');
             const quickReplies = document.querySelectorAll('.whatsapp-widget-quick-reply');
 
+            const updateSendButton = () => {
+                if (input.value.trim()) {
+                    sendBtn.classList.add('active');
+                } else {
+                    sendBtn.classList.remove('active');
+                }
+            };
+
             const iconClick = () => {
-                const isVisible = chat.style.display === 'block';
+                const isVisible = chat.classList.contains('show');
                 if (isVisible) {
                     chat.classList.remove('show');
                     setTimeout(() => {
                         chat.style.display = 'none';
-                    }, 300);
+                    }, 250);
                 } else {
                     chat.style.display = 'block';
-                    setTimeout(() => {
+                    requestAnimationFrame(() => {
                         chat.classList.add('show');
-                    }, 10);
-                    input.focus();
+                    });
+                    setTimeout(() => input.focus(), 250);
                 }
             };
 
@@ -421,26 +358,35 @@
                 chat.classList.remove('show');
                 setTimeout(() => {
                     chat.style.display = 'none';
-                }, 300);
+                }, 250);
             };
 
             const sendMessage = (message) => {
                 if (message.trim()) {
                     window.open(`https://wa.me/${this.options.phone}?text=${encodeURIComponent(message)}`, '_blank');
                     input.value = '';
+                    updateSendButton();
                     closeClick();
                 }
             };
 
-            const sendClick = () => sendMessage(input.value);
+            const sendClick = () => {
+                if (sendBtn.classList.contains('active')) {
+                    sendMessage(input.value);
+                }
+            };
+
             const inputKeypress = (e) => {
-                if (e.key === 'Enter') sendMessage(input.value);
+                if (e.key === 'Enter' && sendBtn.classList.contains('active')) {
+                    sendMessage(input.value);
+                }
             };
 
             icon.addEventListener('click', iconClick);
             closeBtn.addEventListener('click', closeClick);
             sendBtn.addEventListener('click', sendClick);
             input.addEventListener('keypress', inputKeypress);
+            input.addEventListener('input', updateSendButton);
 
             quickReplies.forEach(button => {
                 const quickReplyClick = () => {
@@ -455,6 +401,7 @@
                 { target: closeBtn, type: 'click', listener: closeClick },
                 { target: sendBtn, type: 'click', listener: sendClick },
                 { target: input, type: 'keypress', listener: inputKeypress },
+                { target: input, type: 'input', listener: updateSendButton },
                 ...Array.from(quickReplies).map(button => ({
                     target: button,
                     type: 'click',
