@@ -78,16 +78,18 @@
         #whatsapp-widget-header {
             background: linear-gradient(180deg, 
                 rgba(255, 255, 255, 1) 0%, 
-                rgba(255, 255, 255, 0.97) 40%,
-                rgba(252, 252, 252, 0.95) 100%);
+                rgba(250, 250, 250, 0.98) 100%);
             color: #1d1d1f;
             padding: 20px 20px 16px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             position: relative;
             backdrop-filter: blur(20px);
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.8),
+                0 1px 3px rgba(0, 0, 0, 0.06);
         }
         
         #whatsapp-widget-header::before {
@@ -99,7 +101,7 @@
             height: 1px;
             background: linear-gradient(90deg, 
                 transparent 0%, 
-                rgba(255, 255, 255, 0.8) 50%, 
+                rgba(255, 255, 255, 0.9) 50%, 
                 transparent 100%);
         }
         
@@ -148,8 +150,21 @@
         #whatsapp-widget-body {
             padding: 20px;
             background: linear-gradient(180deg, 
-                rgba(250, 250, 250, 0.6) 0%, 
-                rgba(255, 255, 255, 0.9) 100%);
+                rgba(245, 245, 247, 0.4) 0%, 
+                rgba(248, 248, 250, 0.6) 100%);
+            position: relative;
+        }
+        
+        #whatsapp-widget-body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(180deg, 
+                rgba(0, 0, 0, 0.02) 0%, 
+                transparent 100%);
         }
         
         .whatsapp-widget-welcome {
@@ -219,29 +234,35 @@
         
         #whatsapp-widget-footer {
             padding: 16px 20px 20px;
-            background: white;
+            background: linear-gradient(180deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(252, 252, 252, 1) 100%);
             display: flex;
             gap: 8px;
             align-items: flex-end;
-            border-top: 1px solid #f2f2f7;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            backdrop-filter: blur(20px);
         }
         
         #whatsapp-widget-input {
             flex: 1;
             padding: 10px 12px;
-            border: 1px solid #d1d1d6;
-            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 10px;
             outline: none;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
             font-size: 15px;
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             color: #1d1d1f;
             letter-spacing: -0.016em;
-            transition: border-color 0.15s ease;
+            transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+            backdrop-filter: blur(10px);
         }
         
         #whatsapp-widget-input:focus {
-            border-color: #1d1d1f;
+            border-color: rgba(29, 29, 31, 0.2);
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 0 3px rgba(29, 29, 31, 0.06);
         }
         
         #whatsapp-widget-input::placeholder {
@@ -249,27 +270,49 @@
         }
         
         #whatsapp-widget-send {
-            background: #1d1d1f;
+            background: linear-gradient(145deg, #1d1d1f 0%, #000 100%);
             border: none;
             width: 36px;
             height: 36px;
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
             opacity: 0.3;
             pointer-events: none;
+            position: relative;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        #whatsapp-widget-send::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(180deg, 
+                rgba(255, 255, 255, 0.15) 0%, 
+                transparent 100%);
+            border-radius: 10px 10px 0 0;
         }
         
         #whatsapp-widget-send.active {
             opacity: 1;
             pointer-events: all;
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                0 2px 8px rgba(0, 0, 0, 0.15);
         }
         
         #whatsapp-widget-send.active:hover {
-            background: #000;
+            background: linear-gradient(145deg, #000 0%, #1d1d1f 100%);
+            transform: translateY(-1px);
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.25),
+                0 4px 12px rgba(0, 0, 0, 0.2);
         }
         
         #whatsapp-widget-send.active:active {
@@ -281,8 +324,10 @@
             padding: 12px;
             font-size: 11px;
             color: #86868b;
-            background: #fbfbfd;
-            border-top: 1px solid #f2f2f7;
+            background: linear-gradient(180deg, 
+                rgba(252, 252, 252, 0.8) 0%, 
+                rgba(248, 248, 248, 1) 100%);
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
             font-weight: 400;
             letter-spacing: 0.006em;
         }
